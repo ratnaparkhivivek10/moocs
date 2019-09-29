@@ -21,9 +21,15 @@ grad = zeros(size(theta));
 %
 
 
+predicted = sigmoid(X*theta);
+actual = y;
 
+loss = ((actual.*log(predicted)) + ((1-actual).*log(1-predicted)));
+cost = sum(loss)/m;
+J = (-1)*cost;
 
-
+error = predicted - actual;
+grad = (1/m)*(X' * error);
 
 
 

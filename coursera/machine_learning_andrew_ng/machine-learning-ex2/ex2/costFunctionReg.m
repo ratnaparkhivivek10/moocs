@@ -18,7 +18,22 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
+predicted = sigmoid(X*theta);
+actual = y;
 
+loss = ((actual.*log(predicted)) + ((1-actual).*log(1-predicted)));
+reg = (lambda/(2*m))*sum(theta(2:length(theta)).^2);
+cost = (-1/m)*sum(loss)+reg;
+J = cost;
+
+error = predicted - actual;
+% grad = (1/m)*(X' * error)+(lambda/m)*theta(2:length(theta));
+% Submission failed: operator +: nonconformant arguments (op1 is 3x1, op2 is 2x1)
+theta(1) = 0
+grad = (1/m)*(X' * error)+(lambda/m)*theta;
+
+J
+grad
 
 
 
